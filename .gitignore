@@ -1,0 +1,5 @@
+# Ignore OS files
+.DS_Store
+
+# No dependencies in this static site
+node_modules/
