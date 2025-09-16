@@ -1,6 +1,6 @@
 # SupportGroups.online Marketing Site
 
-This repository contains the static marketing site for **SupportGroups.online**, an independent platform connecting people to safe, compassionate and accessible group support online. The site introduces visitors to the platform, outlines how it works, showcases available group categories, provides simple pricing tiers, and encourages users to join or refer friends.
+This repository contains the static marketing site for **SupportGroups.online**, an independent platform under **ExpandedAwareness.io IP Holdings** connecting people to safe, compassionate and accessible group support online. The site introduces visitors to the platform, outlines how it works, showcases available group categories, provides simple pricing tiers, and encourages users to join or refer friends.
 
 ## Structure
 
