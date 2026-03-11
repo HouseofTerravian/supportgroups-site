@@ -4,32 +4,40 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SupportGroups.online – Find Your People. Heal Together.</title>
-  <meta name="description" content="SupportGroups.online connects you with small, facilitator‑led groups across mental health, grief, chronic illness, relationships and more—so you never have to carry it alone.">
-  <!-- Include Inter font for a clean sans-serif look -->
+  <meta name="description" content="SupportGroups.online connects you with small, facilitator-led groups across mental health, grief, chronic illness, relationships and more—so you never have to carry it alone.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <!-- Tailwind via CDN for rapid styling -->
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
-    }
-    /* Custom pill styling used in hero */
+    body { font-family: 'Inter', sans-serif; }
     .pill {
-      @apply inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-white/90 text-sm backdrop-blur;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.1);
+      padding: 0.25rem 0.75rem;
+      color: rgba(255,255,255,0.9);
+      font-size: 0.875rem;
+      backdrop-filter: blur(4px);
     }
+    html { scroll-behavior: smooth; }
+    details > summary { list-style: none; }
+    details > summary::-webkit-details-marker { display: none; }
+    details[open] .faq-icon { transform: rotate(45deg); }
+    .faq-icon { transition: transform 0.2s; display: inline-block; }
   </style>
 </head>
 <body class="min-h-screen bg-gradient-to-b from-teal-700 via-teal-600 to-white text-slate-900">
+
   <!-- Header -->
   <header class="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-5">
     <div class="flex items-center gap-3">
-      <!-- SupportGroups.online mark placeholder -->
-      <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-teal-700 font-black">SG</div>
+      <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-teal-700 font-black text-sm">SG</div>
       <div class="leading-tight">
         <div class="text-white font-semibold tracking-tight">SupportGroups.online</div>
-        <!-- Removed reference to Mr. Metaphysical Health & Wellness -->
       </div>
     </div>
     <nav class="hidden items-center gap-6 text-sm text-white/90 md:flex">
@@ -39,23 +47,22 @@
       <a href="#faq" class="hover:text-white">FAQ</a>
     </nav>
     <div class="flex items-center gap-3">
-      <a href="#" class="rounded-full border border-white/30 px-4 py-2 text-sm text-white/90 hover:bg-white/10">Sign in</a>
-      <a href="#" class="rounded-full bg-white px-4 py-2 text-sm font-semibold text-teal-700 hover:bg-teal-50">Create account</a>
+      <a href="https://app.supportgroups.online/login" class="rounded-full border border-white/30 px-4 py-2 text-sm text-white/90 hover:bg-white/10">Sign in</a>
+      <a href="https://app.supportgroups.online/register" class="rounded-full bg-white px-4 py-2 text-sm font-semibold text-teal-700 hover:bg-teal-50">Create account</a>
     </div>
   </header>
 
   <main>
-    <!-- Hero section -->
+    <!-- Hero -->
     <section class="relative mx-auto mt-6 w-full max-w-7xl px-6 pb-16 pt-8">
       <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
         <div>
-          <span class="pill">Evidence‑informed • Facilitator‑led • Confidential</span>
+          <span class="pill">Evidence-informed &bull; Facilitator-led &bull; Confidential</span>
           <h1 class="mt-4 text-4xl font-extrabold tracking-tight text-white md:text-5xl">Find your people. <span class="text-teal-200">Heal together.</span></h1>
-          <p class="mt-4 max-w-xl text-teal-100">SupportGroups.online connects you with small, facilitator‑led groups across mental health, grief, chronic illness, relationships, spirituality, and more—so you never have to carry it alone.</p>
+          <p class="mt-4 max-w-xl text-teal-100">SupportGroups.online connects you with small, facilitator-led groups across mental health, grief, chronic illness, relationships, spirituality, and more—so you never have to carry it alone.</p>
           <div class="mt-6 flex w-full max-w-xl items-center gap-2 rounded-2xl bg-white p-2 shadow-xl">
-            <!-- Simplified search bar; non-functional -->
-            <input placeholder="Search topics (e.g., grief, men’s mental health, PTSD)" class="w-full rounded-xl px-3 py-2 text-slate-900 placeholder-slate-400 focus:outline-none">
-            <button class="rounded-xl bg-teal-600 px-4 py-2 text-white font-semibold hover:bg-teal-700">Search</button>
+            <input id="hero-search" placeholder="Search topics (e.g., grief, men's mental health, PTSD)" class="w-full rounded-xl px-3 py-2 text-slate-900 placeholder-slate-400 focus:outline-none">
+            <button onclick="heroSearch()" class="rounded-xl bg-teal-600 px-4 py-2 text-white font-semibold hover:bg-teal-700 whitespace-nowrap">Search</button>
           </div>
           <div class="mt-6 grid grid-cols-3 gap-4">
             <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
@@ -67,8 +74,8 @@
               <div class="text-slate-500 text-sm">New this week</div>
             </div>
             <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-              <div class="text-2xl font-semibold tracking-tight text-slate-900">Yes</div>
-              <div class="text-slate-500 text-sm">HIPAA‑aware design</div>
+              <div class="text-2xl font-semibold tracking-tight text-slate-900">50+</div>
+              <div class="text-slate-500 text-sm">Countries represented</div>
             </div>
           </div>
         </div>
@@ -81,36 +88,36 @@
               <div class="space-y-3">
                 <div class="flex items-start justify-between rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
                   <div>
-                    <h4 class="font-semibold text-slate-900">Men’s Mental Health • Evening Circle</h4>
-                    <div class="mt-2 text-slate-600 text-sm">Thursdays · 7:00–8:15 PM CT</div>
+                    <h4 class="font-semibold text-slate-900">Men's Mental Health &bull; Evening Circle</h4>
+                    <div class="mt-2 text-slate-600 text-sm">Thursdays &bull; 7:00–8:15 PM CT</div>
                   </div>
-                    <div class="text-right">
-                      <div class="text-sm text-slate-500">Open seats</div>
-                      <div class="text-lg font-semibold text-slate-900">4 of 8</div>
-                      <a href="#" class="mt-3 inline-block rounded-full bg-teal-600 px-4 py-2 text-sm font-medium text-white hover:bg-teal-700">Join</a>
-                    </div>
+                  <div class="text-right">
+                    <div class="text-sm text-slate-500">Open seats</div>
+                    <div class="text-lg font-semibold text-slate-900">4 of 8</div>
+                    <a href="https://app.supportgroups.online" class="mt-3 inline-block rounded-full bg-teal-600 px-4 py-2 text-sm font-medium text-white hover:bg-teal-700">Join</a>
+                  </div>
                 </div>
                 <div class="flex items-start justify-between rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
                   <div>
-                    <h4 class="font-semibold text-slate-900">Grief &amp; Loss • Gentle Mornings</h4>
-                    <div class="mt-2 text-slate-600 text-sm">Mon/Wed/Fri · 8:00–8:45 AM CT</div>
+                    <h4 class="font-semibold text-slate-900">Grief &amp; Loss &bull; Gentle Mornings</h4>
+                    <div class="mt-2 text-slate-600 text-sm">Mon/Wed/Fri &bull; 8:00–8:45 AM CT</div>
                   </div>
-                    <div class="text-right">
-                      <div class="text-sm text-slate-500">Open seats</div>
-                      <div class="text-lg font-semibold text-slate-900">2 of 10</div>
-                      <a href="#" class="mt-3 inline-block rounded-full bg-teal-600 px-4 py-2 text-sm font-medium text-white hover:bg-teal-700">Join</a>
-                    </div>
+                  <div class="text-right">
+                    <div class="text-sm text-slate-500">Open seats</div>
+                    <div class="text-lg font-semibold text-slate-900">2 of 10</div>
+                    <a href="https://app.supportgroups.online" class="mt-3 inline-block rounded-full bg-teal-600 px-4 py-2 text-sm font-medium text-white hover:bg-teal-700">Join</a>
+                  </div>
                 </div>
                 <div class="flex items-start justify-between rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
                   <div>
                     <h4 class="font-semibold text-slate-900">PTSD &amp; Trauma Integration</h4>
-                    <div class="mt-2 text-slate-600 text-sm">Tuesdays · 6:30–7:45 PM CT</div>
+                    <div class="mt-2 text-slate-600 text-sm">Tuesdays &bull; 6:30–7:45 PM CT</div>
                   </div>
-                    <div class="text-right">
-                      <div class="text-sm text-slate-500">Open seats</div>
-                      <div class="text-lg font-semibold text-slate-900">3 of 8</div>
-                      <a href="#" class="mt-3 inline-block rounded-full bg-teal-600 px-4 py-2 text-sm font-medium text-white hover:bg-teal-700">Join</a>
-                    </div>
+                  <div class="text-right">
+                    <div class="text-sm text-slate-500">Open seats</div>
+                    <div class="text-lg font-semibold text-slate-900">3 of 8</div>
+                    <a href="https://app.supportgroups.online" class="mt-3 inline-block rounded-full bg-teal-600 px-4 py-2 text-sm font-medium text-white hover:bg-teal-700">Join</a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -123,72 +130,72 @@
     <section id="groups" class="mx-auto w-full max-w-7xl px-6 py-14">
       <div class="flex items-end justify-between">
         <h2 class="text-2xl font-bold text-slate-900">Browse by category</h2>
-        <a class="text-sm font-semibold text-teal-700 hover:underline" href="#">View all groups</a>
+        <a class="text-sm font-semibold text-teal-700 hover:underline" href="https://app.supportgroups.online/search">View all groups</a>
       </div>
       <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <div class="flex h-full flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm transition hover:shadow-md">
+        <a href="https://app.supportgroups.online/search?category=chronic-illness" class="flex h-full flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm transition hover:shadow-md hover:border-teal-300">
           <div>
             <h3 class="text-base font-semibold text-slate-900">Chronic Illness &amp; Pain</h3>
-            <p class="mt-3 text-sm text-slate-600">Compassionate spaces for pacing, flare‑days, and life design.</p>
+            <p class="mt-3 text-sm text-slate-600">Compassionate spaces for pacing, flare-days, and life design.</p>
           </div>
-          <span class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-teal-700">Explore →</span>
-        </div>
-        <div class="flex h-full flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm transition hover:shadow-md">
+          <span class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-teal-700">Explore &rarr;</span>
+        </a>
+        <a href="https://app.supportgroups.online/search?category=mens-mental-health" class="flex h-full flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm transition hover:shadow-md hover:border-teal-300">
           <div>
-            <h3 class="text-base font-semibold text-slate-900">Men’s Mental Health</h3>
-            <p class="mt-3 text-sm text-slate-600">Accountability + emotional literacy in male‑affirming circles.</p>
+            <h3 class="text-base font-semibold text-slate-900">Men's Mental Health</h3>
+            <p class="mt-3 text-sm text-slate-600">Accountability + emotional literacy in male-affirming circles.</p>
           </div>
-          <span class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-teal-700">Explore →</span>
-        </div>
-        <div class="flex h-full flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm transition hover:shadow-md">
+          <span class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-teal-700">Explore &rarr;</span>
+        </a>
+        <a href="https://app.supportgroups.online/search?category=grief" class="flex h-full flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm transition hover:shadow-md hover:border-teal-300">
           <div>
             <h3 class="text-base font-semibold text-slate-900">Grief &amp; Loss</h3>
-            <p class="mt-3 text-sm text-slate-600">Witnessing, ritual, and gentle re‑entry into daily life.</p>
+            <p class="mt-3 text-sm text-slate-600">Witnessing, ritual, and gentle re-entry into daily life.</p>
           </div>
-          <span class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-teal-700">Explore →</span>
-        </div>
-        <div class="flex h-full flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm transition hover:shadow-md">
+          <span class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-teal-700">Explore &rarr;</span>
+        </a>
+        <a href="https://app.supportgroups.online/search?category=ptsd-trauma" class="flex h-full flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm transition hover:shadow-md hover:border-teal-300">
           <div>
             <h3 class="text-base font-semibold text-slate-900">PTSD &amp; Trauma</h3>
-            <p class="mt-3 text-sm text-slate-600">Nervous‑system aware groups for stabilization and integration.</p>
+            <p class="mt-3 text-sm text-slate-600">Nervous-system aware groups for stabilization and integration.</p>
           </div>
-          <span class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-teal-700">Explore →</span>
-        </div>
-        <div class="flex h-full flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm transition hover:shadow-md">
+          <span class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-teal-700">Explore &rarr;</span>
+        </a>
+        <a href="https://app.supportgroups.online/search?category=caregivers" class="flex h-full flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm transition hover:shadow-md hover:border-teal-300">
           <div>
             <h3 class="text-base font-semibold text-slate-900">Caregivers</h3>
             <p class="mt-3 text-sm text-slate-600">Burnout prevention and boundaried care rhythms.</p>
           </div>
-          <span class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-teal-700">Explore →</span>
-        </div>
-        <div class="flex h-full flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm transition hover:shadow-md">
+          <span class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-teal-700">Explore &rarr;</span>
+        </a>
+        <a href="https://app.supportgroups.online/search?category=relationships" class="flex h-full flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm transition hover:shadow-md hover:border-teal-300">
           <div>
             <h3 class="text-base font-semibold text-slate-900">Relationships</h3>
             <p class="mt-3 text-sm text-slate-600">Attachment patterns, repair practices, and conscious love.</p>
           </div>
-          <span class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-teal-700">Explore →</span>
-        </div>
-        <div class="flex h-full flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm transition hover:shadow-md">
+          <span class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-teal-700">Explore &rarr;</span>
+        </a>
+        <a href="https://app.supportgroups.online/search?category=spiritual-healing" class="flex h-full flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm transition hover:shadow-md hover:border-teal-300">
           <div>
             <h3 class="text-base font-semibold text-slate-900">Spiritual Healing</h3>
-            <p class="mt-3 text-sm text-slate-600">Prayer, meditation, and energy‑informed care circles.</p>
+            <p class="mt-3 text-sm text-slate-600">Prayer, meditation, and energy-informed care circles.</p>
           </div>
-          <span class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-teal-700">Explore →</span>
-        </div>
-        <div class="flex h-full flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm transition hover:shadow-md">
+          <span class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-teal-700">Explore &rarr;</span>
+        </a>
+        <a href="https://app.supportgroups.online/search?category=teens" class="flex h-full flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm transition hover:shadow-md hover:border-teal-300">
           <div>
             <h3 class="text-base font-semibold text-slate-900">Teens (13–17)</h3>
-            <p class="mt-3 text-sm text-slate-600">Parent‑approved, clinician‑moderated groups for youth.</p>
+            <p class="mt-3 text-sm text-slate-600">Parent-approved, clinician-moderated groups for youth.</p>
           </div>
-          <span class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-teal-700">Explore →</span>
-        </div>
-        <div class="flex h-full flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm transition hover:shadow-md">
+          <span class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-teal-700">Explore &rarr;</span>
+        </a>
+        <a href="https://app.supportgroups.online/search?category=professionals" class="flex h-full flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm transition hover:shadow-md hover:border-teal-300">
           <div>
             <h3 class="text-base font-semibold text-slate-900">Professionals</h3>
             <p class="mt-3 text-sm text-slate-600">For therapists, first responders, educators, and healthcare.</p>
           </div>
-          <span class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-teal-700">Explore →</span>
-        </div>
+          <span class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-teal-700">Explore &rarr;</span>
+        </a>
       </div>
     </section>
 
@@ -197,17 +204,17 @@
       <h2 class="text-2xl font-bold text-slate-900">How it works</h2>
       <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-3">
         <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-          <div class="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-teal-50 text-teal-600">1</div>
+          <div class="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-teal-50 text-teal-600 font-semibold">1</div>
           <h3 class="font-semibold text-slate-900">Match</h3>
-          <p class="mt-2 text-sm text-slate-600">Tell us your goals, schedule, and preferences. We’ll suggest the best group fit.</p>
+          <p class="mt-2 text-sm text-slate-600">Tell us your goals, schedule, and preferences. We'll suggest the best group fit.</p>
         </div>
         <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-          <div class="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-teal-50 text-teal-600">2</div>
+          <div class="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-teal-50 text-teal-600 font-semibold">2</div>
           <h3 class="font-semibold text-slate-900">Meet</h3>
           <p class="mt-2 text-sm text-slate-600">Join a small, confidential circle led by trained facilitators on a reliable platform.</p>
         </div>
         <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
-          <div class="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-teal-50 text-teal-600">3</div>
+          <div class="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-xl bg-teal-50 text-teal-600 font-semibold">3</div>
           <h3 class="font-semibold text-slate-900">Grow</h3>
           <p class="mt-2 text-sm text-slate-600">Practice skills, track progress, and receive resources between sessions.</p>
         </div>
@@ -216,41 +223,91 @@
 
     <!-- Pricing -->
     <section id="pricing" class="mx-auto w-full max-w-7xl px-6 py-14">
-      <div class="flex items-end justify-between">
+      <div class="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
         <h2 class="text-2xl font-bold text-slate-900">Simple, transparent pricing</h2>
-        <div class="text-sm text-slate-500">Scholarships available • HSA/FSA receipts • Private pay</div>
+        <div class="text-sm text-slate-500">Scholarships available &bull; HSA/FSA receipts &bull; Private pay</div>
       </div>
       <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-3">
         <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm flex flex-col">
           <h3 class="text-lg font-semibold text-slate-900">Community</h3>
           <div class="mt-2 text-2xl font-bold text-slate-900">$0<span class="text-sm font-normal text-slate-500">/mo</span></div>
-          <ul class="mt-4 space-y-2 text-sm text-slate-600">
-            <li>Open forums &amp; resources</li>
-            <li>Intro events each month</li>
-            <li>Member‑only newsletter</li>
+          <ul class="mt-4 space-y-2 text-sm text-slate-600 flex-1">
+            <li>&bull; Open forums &amp; resources</li>
+            <li>&bull; Intro events each month</li>
+            <li>&bull; Member-only newsletter</li>
           </ul>
-          <a href="#" class="mt-5 inline-block rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800 text-center">Get started</a>
+          <a href="https://app.supportgroups.online/register" class="mt-5 inline-block rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800 text-center">Get started</a>
         </div>
         <div class="rounded-2xl border border-teal-600 ring-4 ring-teal-100 bg-white p-6 shadow-sm flex flex-col">
+          <div class="text-xs font-semibold text-teal-600 uppercase tracking-wide mb-1">Most popular</div>
           <h3 class="text-lg font-semibold text-slate-900">Member</h3>
           <div class="mt-2 text-2xl font-bold text-slate-900">$39<span class="text-sm font-normal text-slate-500">/mo</span></div>
-          <ul class="mt-4 space-y-2 text-sm text-slate-600">
-            <li>1 live group / week</li>
-            <li>Resource library access</li>
-            <li>Private chat with facilitator</li>
+          <ul class="mt-4 space-y-2 text-sm text-slate-600 flex-1">
+            <li>&bull; 1 live group / week</li>
+            <li>&bull; Resource library access</li>
+            <li>&bull; Private chat with facilitator</li>
           </ul>
-          <a href="#" class="mt-5 inline-block rounded-full bg-teal-600 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700 text-center">Get started</a>
+          <a href="https://app.supportgroups.online/register?plan=member" class="mt-5 inline-block rounded-full bg-teal-600 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-700 text-center">Get started</a>
         </div>
         <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm flex flex-col">
           <h3 class="text-lg font-semibold text-slate-900">Facilitator</h3>
-          <div class="mt-2 text-2xl font-bold text-slate-900">$0<span class="text-sm font-normal text-slate-500">/mo</span></div>
-          <ul class="mt-4 space-y-2 text-sm text-slate-600">
-            <li>Apply to host groups</li>
-            <li>Revenue share model</li>
-            <li>Training &amp; supervision</li>
+          <div class="mt-2 text-2xl font-bold text-slate-900">$0<span class="text-sm font-normal text-slate-500"> to host</span></div>
+          <ul class="mt-4 space-y-2 text-sm text-slate-600 flex-1">
+            <li>&bull; Apply to host groups</li>
+            <li>&bull; 50% revenue share on sessions</li>
+            <li>&bull; Training &amp; supervision</li>
           </ul>
-          <a href="#" class="mt-5 inline-block rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800 text-center">Get started</a>
+          <a href="https://app.supportgroups.online/host/apply" class="mt-5 inline-block rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white hover:bg-slate-800 text-center">Apply to host</a>
         </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="mx-auto w-full max-w-7xl px-6 py-14">
+      <h2 class="text-2xl font-bold text-slate-900">Frequently asked questions</h2>
+      <div class="mt-6 space-y-4 max-w-3xl">
+        <details class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <summary class="cursor-pointer font-semibold text-slate-900 flex items-center justify-between">
+            Is SupportGroups.online a therapy service?
+            <span class="faq-icon text-teal-600 text-xl leading-none">+</span>
+          </summary>
+          <p class="mt-3 text-sm text-slate-600">No. SupportGroups.online is a peer-support marketplace, not a licensed therapy or clinical service. Facilitators may hold professional credentials, but groups are not a substitute for individual therapy or psychiatric treatment. If you are in crisis, call <strong>988</strong> or your local emergency number.</p>
+        </details>
+        <details class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <summary class="cursor-pointer font-semibold text-slate-900 flex items-center justify-between">
+            Who leads the groups?
+            <span class="faq-icon text-teal-600 text-xl leading-none">+</span>
+          </summary>
+          <p class="mt-3 text-sm text-slate-600">Groups are led by vetted facilitators — coaches, counselors, community leaders, churches, and organizations. All facilitators apply through our host program and agree to our community guidelines before going live.</p>
+        </details>
+        <details class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <summary class="cursor-pointer font-semibold text-slate-900 flex items-center justify-between">
+            How does payment work?
+            <span class="faq-icon text-teal-600 text-xl leading-none">+</span>
+          </summary>
+          <p class="mt-3 text-sm text-slate-600">Sessions are paid securely through Stripe. Facilitators receive 50% of each session payment. The platform retains 50% to cover hosting, tooling, and platform support. You can pay per session or in packages set by the facilitator.</p>
+        </details>
+        <details class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <summary class="cursor-pointer font-semibold text-slate-900 flex items-center justify-between">
+            Can I join groups from outside the US?
+            <span class="faq-icon text-teal-600 text-xl leading-none">+</span>
+          </summary>
+          <p class="mt-3 text-sm text-slate-600">Yes. SupportGroups.online is a global platform. Groups are hosted virtually, and you can search by timezone, language, or location. Facilitators from any country are welcome to apply.</p>
+        </details>
+        <details class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <summary class="cursor-pointer font-semibold text-slate-900 flex items-center justify-between">
+            What if I want a refund?
+            <span class="faq-icon text-teal-600 text-xl leading-none">+</span>
+          </summary>
+          <p class="mt-3 text-sm text-slate-600">Refunds may be requested within 24 hours of booking if the session has not yet occurred. See our <a href="refunds.html" class="text-teal-700 underline">Refund Policy</a> for full details.</p>
+        </details>
+        <details class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+          <summary class="cursor-pointer font-semibold text-slate-900 flex items-center justify-between">
+            How do I become a facilitator?
+            <span class="faq-icon text-teal-600 text-xl leading-none">+</span>
+          </summary>
+          <p class="mt-3 text-sm text-slate-600">Apply through the <a href="https://app.supportgroups.online/host/apply" class="text-teal-700 underline">Host Application</a> on the app. We review credentials, background, and group concept before approval. There is no monthly fee to host — we only earn when you earn.</p>
+        </details>
       </div>
     </section>
 
@@ -260,11 +317,11 @@
         <div class="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
           <div>
             <h3 class="text-2xl font-bold tracking-tight">Ready to feel supported?</h3>
-            <p class="mt-1 text-teal-100">Create your account and we’ll match you with a circle this week.</p>
+            <p class="mt-1 text-teal-100">Create your account and we'll match you with a circle this week.</p>
           </div>
           <div class="flex gap-3">
-            <a href="#" class="rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-teal-700 hover:bg-teal-50">Get matched</a>
-            <a href="#" class="rounded-full border border-white/30 px-5 py-2.5 text-sm text-white hover:bg-white/10">Refer a friend</a>
+            <a href="https://app.supportgroups.online/register" class="rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-teal-700 hover:bg-teal-50">Get matched</a>
+            <a href="https://app.supportgroups.online/host/apply" class="rounded-full border border-white/30 px-5 py-2.5 text-sm text-white hover:bg-white/10">Host a group</a>
           </div>
         </div>
       </div>
@@ -277,38 +334,56 @@
       <div class="grid grid-cols-1 gap-8 md:grid-cols-4">
         <div>
           <div class="flex items-center gap-2">
-            <!-- Update brand mark to SG -->
-            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-700 font-black text-white">SG</div>
+            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-700 font-black text-white text-sm">SG</div>
             <div class="font-semibold text-slate-900">SupportGroups.online</div>
           </div>
-          <p class="mt-3 text-sm text-slate-600">SupportGroups.online is an independent platform under <span class="font-medium">ExpandedAwareness.io IP Holdings</span>, connecting people to safe, compassionate and accessible group support online.</p>
+          <p class="mt-3 text-sm text-slate-600">An independent platform under <span class="font-medium">ExpandedAwareness.io IP Holdings</span>, a DBA of SlateRiver LLC, a New Mexico LLC. Connecting people to safe, compassionate, and accessible group support worldwide.</p>
+          <p class="mt-2 text-xs text-slate-400">Contact: MCM Enterprises &bull; <a href="mailto:support@supportgroups.online" class="hover:text-slate-600">support@supportgroups.online</a></p>
         </div>
         <div>
           <h4 class="font-semibold text-slate-900">Explore</h4>
           <ul class="mt-3 space-y-2 text-sm text-slate-600">
-            <li><a class="hover:text-slate-900" href="#groups">All groups</a></li>
+            <li><a class="hover:text-slate-900" href="https://app.supportgroups.online/search">All groups</a></li>
             <li><a class="hover:text-slate-900" href="#pricing">Pricing</a></li>
             <li><a class="hover:text-slate-900" href="#faq">FAQ</a></li>
+            <li><a class="hover:text-slate-900" href="https://app.supportgroups.online/host/apply">Host a group</a></li>
           </ul>
         </div>
         <div>
           <h4 class="font-semibold text-slate-900">For Facilitators</h4>
           <ul class="mt-3 space-y-2 text-sm text-slate-600">
-            <li><a class="hover:text-slate-900" href="#">Apply</a></li>
-            <li><a class="hover:text-slate-900" href="#">Guidelines</a></li>
-            <li><a class="hover:text-slate-900" href="#">Revenue share</a></li>
+            <li><a class="hover:text-slate-900" href="https://app.supportgroups.online/host/apply">Apply to host</a></li>
+            <li><a class="hover:text-slate-900" href="community-guidelines.html">Community guidelines</a></li>
+            <li><a class="hover:text-slate-900" href="#pricing">Revenue share</a></li>
+            <li><a class="hover:text-slate-900" href="affiliates.html">Affiliate program</a></li>
           </ul>
         </div>
         <div>
           <h4 class="font-semibold text-slate-900">Legal</h4>
           <ul class="mt-3 space-y-2 text-sm text-slate-600">
-            <li>Not a crisis service. If you are in danger, call 911 or your local emergency number.</li>
-            <li>Terms • Privacy • Community Guidelines</li>
-                <li>© 2025 SupportGroups.online. All rights reserved.</li>
+            <li><a class="hover:text-slate-900" href="terms.html">Terms &amp; Conditions</a></li>
+            <li><a class="hover:text-slate-900" href="privacy.html">Privacy Policy</a></li>
+            <li><a class="hover:text-slate-900" href="refunds.html">Refund Policy</a></li>
+            <li><a class="hover:text-slate-900" href="accessibility.html">Accessibility</a></li>
           </ul>
+          <p class="mt-4 text-xs text-slate-400">Not a crisis service. If you are in danger, call <strong>911</strong> or your local emergency number. Mental health crisis: <strong>988</strong>.</p>
         </div>
+      </div>
+      <div class="mt-8 border-t border-slate-200 pt-6 text-center text-xs text-slate-400">
+        &copy; 2026 SupportGroups.online. All rights reserved. SupportGroups.online does not provide licensed clinical or therapy services.
       </div>
     </div>
   </footer>
+
+  <script>
+    function heroSearch() {
+      const q = document.getElementById('hero-search').value.trim();
+      const base = 'https://app.supportgroups.online/search';
+      window.location.href = q ? base + '?q=' + encodeURIComponent(q) : base;
+    }
+    document.getElementById('hero-search').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') heroSearch();
+    });
+  </script>
 </body>
 </html>
